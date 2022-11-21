@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+Home Page
+{% endblock %}
+{% block heading %}
+Search For Open Ports
+{% endblock %}
+{% block content %}
+<form action="" method="POST" class="mb-5">
+            <div class="form-group">
+                <input name="ip" class="form-control form-control-lg" type="text" placeholder="Enter IP-Address"
+                       id="inputLarge">
+            </div>
+            <div class="form-group">
+                <input name="pr" class="form-control form-control-lg " type="text" placeholder="Enter Port Range eg: 0-200">
+            </div>
+
+            <div class="d-grid gap-2 text-center">
+
+            {% if msg%}
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> {{ msg }}
+            </div>
+            {% endif %}
+
+                <input name="sub" type="submit" class="btn btn-lg btn-primary" type="button" value="Scan Ports">
+            </div>
+
+        </form>
+{% endblock %}

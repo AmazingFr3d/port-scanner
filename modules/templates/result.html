@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}
+Results
+{% endblock %}
+
+{% block heading %}
+Search For Open Ports
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="POST" class="mb-5">
+            <div class="form-group">
+                <input name="ip" class="form-control form-control-lg" type="text" placeholder="Enter IP-Address"
+                       id="inputLarge">
+            </div>
+            <div class="form-group">
+                <input name="pr" class="form-control form-control-lg " type="text" placeholder="Enter Port Range eg: 0-200">
+            </div>
+
+            <div class="d-grid gap-2 text-center">
+
+            {% if msg%}
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> {{ msg }}
+            </div>
+            {% endif %}
+
+                <input name="sub" type="submit" class="btn btn-lg btn-primary" type="button" value="Scan Ports">
+            </div>
+
+        </form>
+
+<div class="col-md-12 mt-4">
+    <h3 class="text-center">
+        Showing "{{ data.shape[0] }}" Open Port(s) for "{{ip}}"
+    </h3>
+
+</div>
+<div class="row mb-5">
+
+
+    <table class="table table-hover mt-3">
+
+        <thead>
+        <tr class="text-center table-primary">
+            <th colspan=5 scope="col"><h3>Result</h3></th>
+        </tr>
+        <tr class="table-primary">
+            <th scope="col">Ip Address</th>
+            <th scope="col">Open Ports</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if data.shape[0] > 0 %}
+            {% for index, row in data.iterrows(): %}
+            <tr>
+                <td>{{ row['Ip Address'] }}</td>
+                <td>{{ row['Open Port'] }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="2" class="text-center text-danger">No open Port found in the given range</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+
+</div>
+
+{% endblock %}
