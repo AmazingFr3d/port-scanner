@@ -10,6 +10,52 @@ import socket
 import pandas as pd
 
 
+def port_desc(port_num: int):
+    ports = [{'Port Number': 1, 'Description': 'TCP\xa0Port Service Multiplexer (TCPMUX)'},
+             {'Port Number': 5, 'Description': 'Remote Job Entry (RJE)'}, {'Port Number': 7, 'Description': 'CHO'},
+             {'Port Number': 18, 'Description': 'Message Send Protocol (MSP)'},
+             {'Port Number': 20, 'Description': 'FTP\xa0— Data'}, {'Port Number': 21, 'Description': 'FTP — Control'},
+             {'Port Number': 22, 'Description': 'SSH\xa0Remote Login Protocol'},
+             {'Port Number': 23, 'Description': 'Telnet'},
+             {'Port Number': 25, 'Description': 'Simple Mail Transfer Protocol\xa0(SMTP)'},
+             {'Port Number': 29, 'Description': 'MSG ICP'}, {'Port Number': 37, 'Description': 'Time'},
+             {'Port Number': 42, 'Description': 'Host Name Server (Nameserv)'},
+             {'Port Number': 43, 'Description': 'WhoIs'},
+             {'Port Number': 49, 'Description': 'Login Host Protocol (Login)'},
+             {'Port Number': 53, 'Description': 'Domain Name System\xa0(DNS)'},
+             {'Port Number': 69, 'Description': 'Trivial File Transfer Protocol\xa0(TFTP)'},
+             {'Port Number': 70, 'Description': 'Gopher\xa0Services'}, {'Port Number': 7, 'Description': 'Finger'},
+             {'Port Number': 80, 'Description': 'HTTP'}, {'Port Number': 103, 'Description': 'X.400\xa0Standard'},
+             {'Port Number': 108, 'Description': 'SNA Gateway Access Server'},
+             {'Port Number': 109, 'Description': 'POP2'}, {'Port Number': 110, 'Description': 'POP3'},
+             {'Port Number': 115, 'Description': 'Simple File Transfer Protocol (SFTP)'},
+             {'Port Number': 118, 'Description': 'SQL\xa0Services'},
+             {'Port Number': 119, 'Description': 'Newsgroup (NNTP)'},
+             {'Port Number': 137, 'Description': 'NetBIOS\xa0Name Service'},
+             {'Port Number': 139, 'Description': 'NetBIOS Datagram Service'},
+             {'Port Number': 143, 'Description': 'Interim Mail Access Protocol (IMAP)'},
+             {'Port Number': 150, 'Description': 'NetBIOS Session Service'},
+             {'Port Number': 156, 'Description': 'SQL Server'}, {'Port Number': 161, 'Description': 'SNMP'},
+             {'Port Number': 179, 'Description': 'Border Gateway Protocol\xa0(BGP)'},
+             {'Port Number': 190, 'Description': 'Gateway Access Control Protocol (GACP)'},
+             {'Port Number': 194, 'Description': 'Internet Relay Chat\xa0(IRC)'},
+             {'Port Number': 197, 'Description': 'Directory Location Service (DLS)'},
+             {'Port Number': 389, 'Description': 'Lightweight Directory Access Protocol\xa0(LDAP)'},
+             {'Port Number': 396, 'Description': 'Novell Netware over IP'},
+             {'Port Number': 443, 'Description': 'HTTPS'},
+             {'Port Number': 444, 'Description': 'Simple Network Paging Protocol (SNPP)'},
+             {'Port Number': 445, 'Description': 'Microsoft-DS'},
+             {'Port Number': 458, 'Description': 'Apple\xa0QuickTime'},
+             {'Port Number': 546, 'Description': 'DHCP\xa0Client'}, {'Port Number': 547, 'Description': 'DHCP Server'},
+             {'Port Number': 563, 'Description': 'SNEWS'}, {'Port Number': 569, 'Description': 'MSN'},
+             {'Port Number': 1080, 'Description': 'Socks'}]
+    for port in ports:
+        if port_num == port['Port Number']:
+            return port['Description']
+        else:
+            return "No Known Description"
+
+
 def port_scanner(ip: str, port_range: str):
     # Regular Expression Pattern to extract the number of ports you want to scan.
     # You have to specify <lowest_port_number>-<highest_port_number> (ex 10-100)
@@ -81,7 +127,8 @@ def port_scanner(ip: str, port_range: str):
                 # If the following line runs then it was successful in connecting to the port.
                 open_port = {
                     'Ip Address': ip_add_entered,
-                    'Open Port': port
+                    'Open Port': port,
+                    'Description': port_desc(int(port))
                 }
                 open_ports.append(open_port)
 
@@ -97,6 +144,5 @@ def port_scanner(ip: str, port_range: str):
     df = pd.DataFrame(open_ports)
 
     return df
-
 
 # print(port_scanner("104.223.100.109","0-500"))
