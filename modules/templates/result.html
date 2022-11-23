@@ -49,6 +49,7 @@ Search For Open Ports
         <tr class="table-primary">
             <th scope="col">Ip Address</th>
             <th scope="col">Open Ports</th>
+            <th scope="col">Port Description</th>
         </tr>
         </thead>
         <tbody>
@@ -57,11 +58,12 @@ Search For Open Ports
             <tr>
                 <td>{{ row['Ip Address'] }}</td>
                 <td>{{ row['Open Port'] }}</td>
+                <td>{{ row['Description'] }}</td>
             </tr>
             {% endfor %}
         {% else %}
             <tr>
-                <td colspan="2" class="text-center text-danger">No open Port found in the given range</td>
+                <td colspan="3" class="text-center text-danger">No open Port found in the given range</td>
             </tr>
         {% endif %}
         </tbody>
